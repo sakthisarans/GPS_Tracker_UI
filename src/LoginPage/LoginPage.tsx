@@ -17,7 +17,6 @@ const LoginPage = () => {
     const [passwordAlert, setPasswordAlert] = useState({"state":false,"message":""});
     const [isValidCredentials, setIsValidCredentials] = useState({"status":false,"message":""});
     const [loading, setLoading] = useState<boolean>(false);
-    const [isSignup, setIsSignup] = useState<boolean>(false);
 
     const [cookies, setCookie, removeCookie] = useCookies(['token']);
 
@@ -77,125 +76,61 @@ const LoginPage = () => {
         }
     }
 
-    const toggleSignup=()=>{
-        setIsSignup(!isSignup);
-    }
-
     return (
         <div className="limiter">
             <div className="container-login100">
                 <div className="wrap-login100">
-                    <span hidden={isSignup}>
-                        <Tilt>
-                        <div className="login100-pic" data-tilt>
-                            <img src={logo} alt="IMG"/>
+                    <Tilt>
+                    <div className="login100-pic" data-tilt>
+                        <img src={logo} alt="IMG"/>
+                    </div>
+                    </Tilt>
+
+                    <form className="login100-form validate-form" onSubmit={handleSubmit}>
+					<span className="login100-form-title">
+						Member Login
+					</span>
+
+                        <div className={`wrap-input100 validate-input${emailAlert.state ? " alert-validate":""}`} data-validate = {emailAlert.message}>
+                            <input className= {`input100`} type="text" name="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)}/>
+                                <span className="focus-input100"></span>
+                                <span className="symbol-input100">
+							<i className="fa fa-envelope" aria-hidden="true"></i>
+						</span>
                         </div>
-                        </Tilt>
-                    </span>
-                    <span hidden={isSignup}>
-                        <form className="login100-form validate-form" onSubmit={handleSubmit}>
-                            <span className="login100-form-title">
-                                Member Login
-                            </span>
 
-                            <div className={`wrap-input100 validate-input${emailAlert.state ? " alert-validate" : ""}`}
-                                 data-validate={emailAlert.message}>
-                                <input className={`input100`} type="text" name="email" placeholder="Email"
-                                       onChange={(e) => setEmail(e.target.value)}/>
-                                    <span className="focus-input100"></span>
-                                    <span className="symbol-input100">
-                                <i className="fa fa-envelope" aria-hidden="true"></i>
-                            </span>
-                            </div>
+                        <div className={`wrap-input100 validate-input${passwordAlert.state ? " alert-validate":""}`} data-validate = {passwordAlert.message}>
+                            <input className="input100" type="text" name="pass" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
+                                <span className="focus-input100"></span>
+                                <span className="symbol-input100">
+							<i className="fa fa-lock" aria-hidden="true"></i>
+						</span>
+                        </div>
 
-                            <div
-                                className={`wrap-input100 validate-input${passwordAlert.state ? " alert-validate" : ""}`}
-                                data-validate={passwordAlert.message}>
-                                <input className="input100" type="text" name="pass" placeholder="Password"
-                                       onChange={(e) => setPassword(e.target.value)}/>
-                                    <span className="focus-input100"></span>
-                                    <span className="symbol-input100">
-                                <i className="fa fa-lock" aria-hidden="true"></i>
-                            </span>
-                            </div>
+                        <div className="container-login100-form-btn">
+                            <button disabled={loading} className="login100-form-btn">
+                                <span className={!loading ? "":"Loading"}>
+                                    {!loading ? "Login" : ""}
+                                </span>
+                            </button>
+                        </div>
 
-                            <div className="container-login100-form-btn">
-                                <button disabled={loading} className="login100-form-btn">
-                                    <span className={!loading ? "" : "Loading"}>
-                                        {!loading ? "Login" : ""}
-                                    </span>
-                                </button>
-                            </div>
+                        <div className="text-center p-t-12">
+						<span className="txt1">
+							Forgot
+						</span>
+                            <a className="txt2" href="#">
+                                Username / Password?
+                            </a>
+                        </div>
 
-                            <div className="text-center p-t-12">
-                            <span className="txt1">
-                                Forgot
-                            </span>
-                                <a className="txt2" href="#">
-                                    Username / Password?
-                                </a>
-                            </div>
-
-                            <div className="text-center p-t-136">
-                                <a className="txt2" onClick={toggleSignup}>
-                                    Create your Account
-                                    <i className="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                        </form>
-                    </span>
-                    <span hidden={!isSignup}>
-                        <form className="login100-form validate-form" onSubmit={handleSubmit}>
-                            <span className="login100-form-title">
-                                Sign Up
-                            </span>
-
-                            <div className={`wrap-input100 validate-input${emailAlert.state ? " alert-validate" : ""}`}
-                                 data-validate={emailAlert.message}>
-                                <input className={`input100`} type="text" name="email" placeholder="Email"
-                                       onChange={(e) => setEmail(e.target.value)}/>
-                                    <span className="focus-input100"></span>
-                                    <span className="symbol-input100">
-                                <i className="fa fa-envelope" aria-hidden="true"></i>
-                            </span>
-                            </div>
-
-                            <div
-                                className={`wrap-input100 validate-input${passwordAlert.state ? " alert-validate" : ""}`}
-                                data-validate={passwordAlert.message}>
-                                <input className="input100" type="text" name="pass" placeholder="Password"
-                                       onChange={(e) => setPassword(e.target.value)}/>
-                                    <span className="focus-input100"></span>
-                                    <span className="symbol-input100">
-                                <i className="fa fa-lock" aria-hidden="true"></i>
-                            </span>
-                            </div>
-
-                            <div className="container-login100-form-btn">
-                                <button disabled={loading} className="login100-form-btn">
-                                    <span className={!loading ? "" : "Loading"}>
-                                        {!loading ? "Login" : ""}
-                                    </span>
-                                </button>
-                            </div>
-
-                            <div className="text-center p-t-12">
-                            <span className="txt1">
-                                Forgot
-                            </span>
-                                <a className="txt2" href="#">
-                                    Username / Password?
-                                </a>
-                            </div>
-
-                            <div className="text-center p-t-136">
-                                <a className="txt2" onClick={toggleSignup}>
-                                    Create your Account
-                                    <i className="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                        </form>
-                    </span>
+                        <div className="text-center p-t-136">
+                            <a className="txt2" href="#">
+                                Create your Account
+                                <i className="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
