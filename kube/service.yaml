@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: uiservice
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     app: trackerui
   ports:
