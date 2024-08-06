@@ -1,5 +1,6 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Navigate, Outlet } from "react-router-dom";
+import LoginPage from "./pages/loginSignup/LoginPage";
 
 const authenticate = () =>{
     const token = false;
@@ -13,7 +14,7 @@ const Routes = () =>{
     const routesForPublic = [
         {
           path: "/login",
-          element: <div>Service Page</div>,
+          element: <LoginPage />,
         },
         {
           path: "/aboutus",
