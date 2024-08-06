@@ -22,7 +22,7 @@ function LoginPage(): JSX.Element {
             }else{
                 setError(res.data.error)
             }
-        })
+        }).catch(e=>setError("Invalod Credentals"))
     }
 
     return (
