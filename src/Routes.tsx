@@ -3,6 +3,7 @@ import { Navigate, Outlet } from "react-router-dom";
 import LoginPage from "./pages/loginSignup/LoginPage";
 import AboutUs from "./pages/AboutUs/AboutUs";
 import axios from "axios";
+import NotFound from "./pages/error/NotFound";
 
 const authenticate = () => {
   const token = localStorage.getItem("Token")
@@ -17,7 +18,7 @@ const authenticate = () => {
       return false;
     });
   }
-  
+
   if (!token) {
     delete axios.defaults.headers.common["Authorization"];
     localStorage.removeItem("Token");
@@ -43,6 +44,14 @@ const Routes = () => {
       path: "/aboutus",
       element: <AboutUs />,
     },
+    {
+      path:"",
+      element: <Navigate to="/home"/>
+    },
+    {
+      path:"*",
+      element: <NotFound/>
+    },
   ];
 
   const routesForAuthenticatedOnly = [
@@ -51,6 +60,7 @@ const Routes = () => {
       element: authenticate(),
       children: [
         {
+          index: true,
           path: "/home",
           element: <div>User Home Page</div>,
         },
