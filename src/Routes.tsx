@@ -1,6 +1,7 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Navigate, Outlet } from "react-router-dom";
 import LoginPage from "./pages/loginSignup/LoginPage";
+import AboutUs from "./pages/AboutUs/AboutUs";
 
 const authenticate = () =>{
     const token = false;
@@ -18,7 +19,7 @@ const Routes = () =>{
         },
         {
           path: "/aboutus",
-          element: <div>About Us</div>,
+          element: <AboutUs />,
         },
       ];
 
