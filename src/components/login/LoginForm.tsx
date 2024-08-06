@@ -1,16 +1,16 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Fragment } from "react/jsx-runtime";
 
 interface LoginFormProps {
     name: React.Dispatch<React.SetStateAction<string>>;
     password: React.Dispatch<React.SetStateAction<string>>;
+    getError:string
+    setError:React.Dispatch<React.SetStateAction<string>>;
     handleSubmit:any
   }
 
-function LoginForm({name,password,handleSubmit}:LoginFormProps):JSX.Element{
+function LoginForm({name,password,getError,setError,handleSubmit}:LoginFormProps):JSX.Element{
 
-    const [getError, setError] = useState("")
 
     const onUnameChange=(event: any)=>{
         name(event.target.value)
@@ -18,7 +18,6 @@ function LoginForm({name,password,handleSubmit}:LoginFormProps):JSX.Element{
 
     const onPwdChange=(event: any)=>{
         password(event.target.value)
-        setError("error")
     }
 
 

@@ -10,15 +10,17 @@ function LoginPage(): JSX.Element {
     const [isLogin, setIsLogin] = useState(true)
     const [getUname, setUname] = useState("")
     const [getPwd, setPwd] = useState("")
+    const [getError, setError] = useState("")
 
     const handleSubmit = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
         e.preventDefault();
 
         axios.post(`${process.env.REACT_APP_BASE_URL}/tracker/auth/user/signin`, { "email": getUname, "password": getPwd }).then(res => {
             if(res.status===200){
-                
                 localStorage.setItem("Token","")
                 navigate("/home",{replace:true})
+            }else{
+                setError(res.data.error)
             }
         })
     }
@@ -32,6 +34,8 @@ function LoginPage(): JSX.Element {
                         name={setUname}
                         password={setPwd}
                         handleSubmit={handleSubmit}
+                        getError={getError}
+                        setError={setError}
 
                     />) : (<div>otp</div>)}
                 </div>
