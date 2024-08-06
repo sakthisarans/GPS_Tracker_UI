@@ -4,16 +4,20 @@ import LoginPage from "./pages/loginSignup/LoginPage";
 import AboutUs from "./pages/AboutUs/AboutUs";
 import axios from "axios";
 
-const authenticate = () =>{
+const authenticate = async ():Promise<JSX.Element> =>{
     const token = localStorage.getItem("Token")
-
-    if (!token) {
+    const validateToken = async ():Promise<boolean> => {
+      const res=await axios.get(`${process.env.REACT_APP_BASE_URL}/tracker/user/validateToken`)
+      console.log("res")
+      return (res && res.status===200);
+    }
+    if (!token && await validateToken()) {
       delete axios.defaults.headers.common["Authorization"];
       localStorage.removeItem("Token");
       return <Navigate to="/login" />;
     }else{
-    axios.defaults.headers.common["Authorization"] = "Bearer " + token;
-    return <Outlet />;
+      axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+      return <Outlet />;
     }
 }
 const Routes = () =>{
@@ -48,6 +52,8 @@ const Routes = () =>{
           ],
         },
       ];
+
+      console.log(routesForAuthenticatedOnly)
       const router = createBrowserRouter([
         ...routesForPublic,
         ...routesForAuthenticatedOnly,
