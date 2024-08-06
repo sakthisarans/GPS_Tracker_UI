@@ -4,12 +4,14 @@ import LoginPage from "./pages/loginSignup/LoginPage";
 import AboutUs from "./pages/AboutUs/AboutUs";
 import axios from "axios";
 
-const authenticate = async ():Promise<JSX.Element> =>{
+const authenticate = async () =>{
+  console.log(process.env.REACT_APP_.BASE_URL)
     const token = localStorage.getItem("Token")
     const validateToken = async ():Promise<boolean> => {
-      const res=await axios.get(`${process.env.REACT_APP_BASE_URL}/tracker/user/validateToken`)
+      const res=await axios.get(`${process.env.REACT_APP_.BASE_URL}/tracker/user/validateToken`)
       console.log("res")
       return (res && res.status===200);
+      
     }
     if (!token && await validateToken()) {
       delete axios.defaults.headers.common["Authorization"];
@@ -52,8 +54,6 @@ const Routes = () =>{
           ],
         },
       ];
-
-      console.log(routesForAuthenticatedOnly)
       const router = createBrowserRouter([
         ...routesForPublic,
         ...routesForAuthenticatedOnly,
