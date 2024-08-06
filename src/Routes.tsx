@@ -2,12 +2,17 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Navigate, Outlet } from "react-router-dom";
 import LoginPage from "./pages/loginSignup/LoginPage";
 import AboutUs from "./pages/AboutUs/AboutUs";
+import axios from "axios";
 
 const authenticate = () =>{
-    const token = false;
+    const token = localStorage.getItem("Token")
+
     if (!token) {
+      delete axios.defaults.headers.common["Authorization"];
+      localStorage.removeItem("Token");
       return <Navigate to="/login" />;
     }else{
+    axios.defaults.headers.common["Authorization"] = "Bearer " + token;
     return <Outlet />;
     }
 }
