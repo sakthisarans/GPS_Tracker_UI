@@ -4,24 +4,26 @@ import LoginPage from "./pages/loginSignup/LoginPage";
 import AboutUs from "./pages/AboutUs/AboutUs";
 import axios from "axios";
 
-const authenticate =  async () => {
-  console.log(process.env.REACT_APP_BASE_URL)
+const authenticate = () => {
   const token = localStorage.getItem("Token")
-  const validateToken = async (): Promise<boolean> => {
-    const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/tracker/user/validateToken`, {
+  const validateToken = (): Promise<boolean> | boolean => {
+    return axios.get(`${process.env.REACT_APP_BASE_URL}/tracker/user/validateToken`, {
       headers: {
-        "Authorization": token
-      }
-    })
-    return (res && res.status === 200);
-
+        Authorization: token,
+      },
+    }).then((res) => {
+      return res && res.status === 200;
+    }).catch((err) => {
+      return false;
+    });
   }
+  
   if (!token) {
     delete axios.defaults.headers.common["Authorization"];
     localStorage.removeItem("Token");
     return <Navigate to="/login" />;
   } else {
-    if (await validateToken()) {
+    if (validateToken()) {
       axios.defaults.headers.common["Authorization"] = "Bearer " + token;
       return <Outlet />;
     } else {
