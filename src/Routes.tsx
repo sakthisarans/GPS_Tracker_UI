@@ -41,6 +41,10 @@ const Routes = () => {
       element: <LoginPage />,
     },
     {
+      path: "/signup",
+      element: <p>sign up</p>,
+    },
+    {
       path: "/aboutus",
       element: <AboutUs />,
     },
