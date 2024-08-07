@@ -20,6 +20,7 @@ function LoginPage(): JSX.Element {
                 if(res.data.is2FAEnabled){
                     setIsLogin(false)
                 }else{
+                    console.log(`token ${res.data.token}`)
                     localStorage.setItem("Token",res.data.token)
                     localStorage.setItem("Uname",res.data.username)
                     
