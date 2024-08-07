@@ -17,12 +17,21 @@ function LoginPage(): JSX.Element {
 
         axios.post(`${process.env.REACT_APP_BASE_URL}/tracker/auth/user/signin`, { "email": getUname, "password": getPwd }).then(res => {
             if(res.status===200){
-                localStorage.setItem("Token","")
-                navigate("/home",{replace:true})
+                if(res.data.is2FAEnabled){
+                    setIsLogin(false)
+                }else{
+                    localStorage.setItem("Token",res.data.token)
+                    localStorage.setItem("Uname",res.data.username)
+                    
+                    navigate("/home",{replace:true})
+                }
             }else{
                 setError(res.data.error)
             }
-        }).catch(e=>setError("Invalod Credentals"))
+        }).catch(e=>{
+            console.log(e)
+            setError("Invalid userName / Password")
+        })
     }
 
     return (

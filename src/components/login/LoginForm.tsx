@@ -1,3 +1,4 @@
+// import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Fragment } from "react/jsx-runtime";
 
@@ -10,13 +11,20 @@ interface LoginFormProps {
   }
 
 function LoginForm({name,password,getError,setError,handleSubmit}:LoginFormProps):JSX.Element{
-
+    // const [getUnameError,setUnameError]=useState("")
+    // const [getPwdeError,setPwdError]=useState("")
 
     const onUnameChange=(event: any)=>{
+        if(false){
+            // setUnameError("User name should be Email")
+        }
         name(event.target.value)
     }
 
     const onPwdChange=(event: any)=>{
+        if(false){
+            // setPwdError("User password doesnt meet the requirement")
+        }
         password(event.target.value)
     }
 
@@ -29,9 +37,15 @@ function LoginForm({name,password,getError,setError,handleSubmit}:LoginFormProps
                             <div className="inputBox">
                                 <input type="text" required onChange={onUnameChange}/> <i>Username</i>
                             </div>
-                            <div className="inputBox">
+                            {/* <span className="error" hidden={!!getUnameError}>
+                                <p id="error">{getUnameError}</p>
+                            </span> */}
+                            <div className={"inputBox"}>
                                 <input type="password" required onChange={onPwdChange}/> <i>Password</i>
                             </div>
+                            {/* <span className={!!getPwdeError? "error": ""} hidden={!!getPwdeError}>
+                                <p id="error">{getPwdeError}</p>
+                            </span> */}
                             <div className="links">
                                 <Link to="/aboutus">Forgot Password</Link>
                                 <Link to="/aboutus">Signup</Link>

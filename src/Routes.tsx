@@ -10,7 +10,7 @@ const authenticate = () => {
   const validateToken = (): Promise<boolean> | boolean => {
     return axios.get(`${process.env.REACT_APP_BASE_URL}/tracker/user/validateToken`, {
       headers: {
-        Authorization: token,
+        Authorization: "Bearer "+token,
       },
     }).then((res) => {
       return res && res.status === 200;
@@ -18,7 +18,7 @@ const authenticate = () => {
       return false;
     });
   }
-
+  console.log(token)
   if (!token) {
     delete axios.defaults.headers.common["Authorization"];
     localStorage.removeItem("Token");
