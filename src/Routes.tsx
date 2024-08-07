@@ -10,7 +10,7 @@ const authenticate = () => {
   const validateToken = (): Promise<boolean> | boolean => {
     return axios.get(`${process.env.REACT_APP_BASE_URL}/tracker/user/validateToken`, {
       headers: {
-        Authorization: "Bearer "+token,
+        Authorization: token,
       },
     }).then((res) => {
       return res && res.status === 200;
