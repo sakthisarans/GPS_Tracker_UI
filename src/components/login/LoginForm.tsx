@@ -1,4 +1,3 @@
-// import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Fragment } from "react/jsx-runtime";
 
@@ -47,7 +46,7 @@ function LoginForm({name,password,getError,setError,handleSubmit}:LoginFormProps
                                 <p id="error">{getPwdeError}</p>
                             </span> */}
                             <div className="links">
-                                <Link to="/aboutus">Forgot Password</Link>
+                                <Link to="/home">Forgot Password</Link>
                                 <Link to="/aboutus">Signup</Link>
                             </div>
                             <div className="inputBox">
