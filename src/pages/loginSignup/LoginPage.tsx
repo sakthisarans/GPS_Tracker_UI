@@ -5,6 +5,8 @@ import LoginForm from "../../components/login/LoginForm";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+import {browserName, osName, osVersion, mobileModel, mobileVendor} from 'react-device-detect'
+
 function LoginPage(): JSX.Element {
     const navigate=useNavigate()
     const [isLogin, setIsLogin] = useState(true)
@@ -21,7 +23,19 @@ function LoginPage(): JSX.Element {
     const handleSubmit = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
         e.preventDefault();
 
-        axios.post(`${process.env.REACT_APP_BASE_URL}/tracker/auth/user/signin`, { "email": getUname, "password": getPwd }).then(res => {
+        const data={
+            "email": getUname, 
+            "password": getPwd,
+            "loginDevice": {
+                "model": mobileModel+" "+mobileVendor,
+                "platform": browserName,
+                "os": osName,
+                "osVersion": osVersion,
+                "location": "string"
+            }
+        }
+
+        axios.post(`${process.env.REACT_APP_BASE_URL}/tracker/auth/user/signin`, data).then(res => {
             if(res.status===200){
                 if(res.data.is2FAEnabled){
                     setIsLogin(false)
