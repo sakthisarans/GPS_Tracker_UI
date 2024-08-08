@@ -31,7 +31,7 @@ function LoginPage(): JSX.Element {
                 "platform": browserName,
                 "os": osName,
                 "osVersion": osVersion,
-                "location": "string"
+                "location": ""
             }
         }
 
@@ -40,8 +40,7 @@ function LoginPage(): JSX.Element {
                 if(res.data.is2FAEnabled){
                     setIsLogin(false)
                 }else{
-                    console.log(`token ${res.data.token}`)
-                    localStorage.setItem("Token","Bearer "+res.data.token)
+                    localStorage.setItem("Token",`${res.data.type} ${res.data.token}`)
                     localStorage.setItem("Uname",res.data.username)
                     navigate("/home",{replace:true})
                     navigate(0)
