@@ -27,7 +27,7 @@ function LoginPage(): JSX.Element {
                     setIsLogin(false)
                 }else{
                     console.log(`token ${res.data.token}`)
-                    localStorage.setItem("Token",`Bearer ${res.data.token}`)
+                    localStorage.setItem("Token","Bearer "+res.data.token)
                     localStorage.setItem("Uname",res.data.username)
                     navigate("/home",{replace:true})
                     navigate(0)
