@@ -1,6 +1,6 @@
 import { Fragment } from "react/jsx-runtime";
 import './LoginPage.css'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LoginForm from "../../components/login/LoginForm";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +12,12 @@ function LoginPage(): JSX.Element {
     const [getPwd, setPwd] = useState("")
     const [getError, setError] = useState("")
 
+    useEffect(()=>{
+        if(localStorage.getItem("Token")!=null){
+            navigate("/home",{replace:true})
+        }
+    })
+
     const handleSubmit = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
         e.preventDefault();
 
@@ -21,10 +27,10 @@ function LoginPage(): JSX.Element {
                     setIsLogin(false)
                 }else{
                     console.log(`token ${res.data.token}`)
-                    localStorage.setItem("Token",res.data.token)
+                    localStorage.setItem("Token",`Bearer ${res.data.token}`)
                     localStorage.setItem("Uname",res.data.username)
-                    
                     navigate("/home",{replace:true})
+                    navigate(0)
                 }
             }else{
                 setError(res.data.error)

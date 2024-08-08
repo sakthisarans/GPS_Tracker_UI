@@ -4,13 +4,14 @@ import LoginPage from "./pages/loginSignup/LoginPage";
 import AboutUs from "./pages/AboutUs/AboutUs";
 import axios from "axios";
 import NotFound from "./pages/error/NotFound";
+import HomePage from "./pages/Home/HomePage";
 
 const authenticate = () => {
-  const token = localStorage.getItem("Token")
+  let token = localStorage.getItem("Token")
   const validateToken = (): Promise<boolean> | boolean => {
     return axios.get(`${process.env.REACT_APP_BASE_URL}/tracker/user/validateToken`, {
       headers: {
-        Authorization: "Bearer "+token,
+        Authorization: token,
       },
     }).then((res) => {
       return res && res.status === 200;
@@ -18,18 +19,18 @@ const authenticate = () => {
       return false;
     });
   }
-  console.log(token)
-  if (!token) {
+  if (token==null) {
     delete axios.defaults.headers.common["Authorization"];
     localStorage.removeItem("Token");
     return <Navigate to="/login" />;
   } else {
     if (validateToken()) {
-      axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+      axios.defaults.headers.common["Authorization"] = token;
       return <Outlet />;
     } else {
       delete axios.defaults.headers.common["Authorization"];
-      localStorage.removeItem("Token");
+      console.log("clear")
+      localStorage.clear();
       return <Navigate to="/login" />;
     }
   }
@@ -66,7 +67,7 @@ const Routes = () => {
         {
           index: true,
           path: "/home",
-          element: <div>User Home Page</div>,
+          element: <HomePage />,
         },
         {
           path: "/profile",
