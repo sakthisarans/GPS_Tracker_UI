@@ -2,29 +2,27 @@ import { Link } from "react-router-dom";
 import { Fragment } from "react/jsx-runtime";
 
 interface LoginFormProps {
-    name: React.Dispatch<React.SetStateAction<string>>;
-    password: React.Dispatch<React.SetStateAction<string>>;
-    getError:string
-    setError:React.Dispatch<React.SetStateAction<string>>;
+    loginForm: {
+        uname: string;
+        pwd: string;
+        error: string;
+    };
     handleSubmit:any
   }
 
-function LoginForm({name,password,getError,setError,handleSubmit}:LoginFormProps):JSX.Element{
-    // const [getUnameError,setUnameError]=useState("")
-    // const [getPwdeError,setPwdError]=useState("")
-
+function LoginForm({loginForm,handleSubmit}:LoginFormProps):JSX.Element{
     const onUnameChange=(event: any)=>{
         if(false){
             // setUnameError("User name should be Email")
         }
-        name(event.target.value)
+        loginForm.uname=(event.target.value)
     }
 
     const onPwdChange=(event: any)=>{
         if(false){
             // setPwdError("User password doesnt meet the requirement")
         }
-        password(event.target.value)
+        loginForm.pwd=(event.target.value)
     }
 
 
@@ -52,8 +50,8 @@ function LoginForm({name,password,getError,setError,handleSubmit}:LoginFormProps
                             <div className="inputBox">
                                 <input type="submit" value="Login" onClick={(e)=>handleSubmit(e)} />
                             </div>
-                            <span className="error" hidden={!!getError}>
-                                <p id="error">{getError}</p>
+                            <span className="error" hidden={!!loginForm.error}>
+                                <p id="error">{(loginForm.error)}</p>
                             </span>
                         </form>
                     </div>

@@ -5,52 +5,54 @@ import LoginForm from "../../components/login/LoginForm";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-import {browserName, osName, osVersion, mobileModel, mobileVendor} from 'react-device-detect'
-
+import { browserName, osName, osVersion, mobileModel, mobileVendor } from 'react-device-detect'
+import { useAuth } from "../../Auth/AuthProvider";
 function LoginPage(): JSX.Element {
-    const navigate=useNavigate()
-    const [isLogin, setIsLogin] = useState(true)
-    const [getUname, setUname] = useState("")
-    const [getPwd, setPwd] = useState("")
-    const [getError, setError] = useState("")
 
-    useEffect(()=>{
-        if(localStorage.getItem("Token")!=null){
-            navigate("/home",{replace:true})
+    
+
+
+    const navigate = useNavigate()
+    const [isLogin, setIsLogin] = useState(true)
+    const [loginForm, setLoginForm] = useState({ uname: "", pwd: "", error: "" })
+
+    const { setToken }:any  = useAuth();
+
+    useEffect(() => {
+        if (localStorage.getItem("Token") != null) {
+            navigate("/home", { replace: true })
         }
     })
-
     const handleSubmit = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
         e.preventDefault();
-
-        const data={
-            "email": getUname, 
-            "password": getPwd,
+        const data = {
+            "email": loginForm.uname,
+            "password": loginForm.pwd,
             "loginDevice": {
-                "model": mobileModel+" "+mobileVendor,
+                "model": mobileModel + " " + mobileVendor,
                 "platform": browserName,
                 "os": osName,
                 "osVersion": osVersion,
                 "location": ""
             }
         }
-
         axios.post(`${process.env.REACT_APP_BASE_URL}/tracker/auth/user/signin`, data).then(res => {
-            if(res.status===200){
-                if(res.data.is2FAEnabled){
+            if (res.status === 200) {
+                if (res.data.is2FAEnabled) {
                     setIsLogin(false)
-                }else{
-                    localStorage.setItem("Token",`${res.data.type} ${res.data.token}`)
-                    localStorage.setItem("Uname",res.data.username)
-                    navigate("/home",{replace:true})
-                    navigate(0)
+                } else {
+                    console.log(`${res.data.type} ${res.data.token}`)
+                    setToken(`${res.data.type} ${res.data.token}`);
+                    localStorage.setItem("Uname", res.data.username)
+                    navigate("/home", { replace: true })
+                    // navigate(0)
                 }
-            }else{
-                setError(res.data.error)
+            } else {
+                setLoginForm({ ...loginForm, error: (res.data.error) })
             }
-        }).catch(e=>{
-            console.log(e)
-            setError("Invalid userName / Password")
+        }).catch(e => {
+            console.log(e);
+            (e.response.status === 406) ? setLoginForm({ ...loginForm, error: "Invalid userName / Password" }) : setLoginForm({ ...loginForm, error: "Something went wrong" });
         })
     }
 
@@ -60,11 +62,8 @@ function LoginPage(): JSX.Element {
                 <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
                 <div className="signin">
                     {isLogin ? (<LoginForm
-                        name={setUname}
-                        password={setPwd}
+                        loginForm={loginForm}
                         handleSubmit={handleSubmit}
-                        getError={getError}
-                        setError={setError}
 
                     />) : (<div>otp</div>)}
                 </div>
@@ -75,3 +74,5 @@ function LoginPage(): JSX.Element {
 
 
 export default LoginPage;
+
+

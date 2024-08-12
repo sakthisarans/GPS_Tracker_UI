@@ -1,7 +1,11 @@
+import AuthProvider from './Auth/AuthProvider';
 import Routes from './Routes'
 function App() {
   return (
-    <Routes />
+    <AuthProvider>
+      <Routes />
+    </AuthProvider>
+    
   );
 }
 
