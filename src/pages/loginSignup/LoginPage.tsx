@@ -43,9 +43,9 @@ function LoginPage(): JSX.Element {
                 } else {
                     console.log(`${res.data.type} ${res.data.token}`)
                     setToken(`${res.data.type} ${res.data.token}`);
+                    localStorage.setItem("Token",`${res.data.type} ${res.data.token}`);
                     localStorage.setItem("Uname", res.data.username)
                     navigate("/home", { replace: true })
-                    // navigate(0)
                 }
             } else {
                 setLoginForm({ ...loginForm, error: (res.data.error) })
