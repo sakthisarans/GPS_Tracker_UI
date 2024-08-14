@@ -1,18 +1,22 @@
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { Fragment } from "react/jsx-runtime";
+import SidePannel from "../../components/Home/SidePannel";
+import MapComponent from "../../components/Home/MapComponent";
 
 function HomePage(){
-    const navigate=useNavigate()
-    const onclick=()=>{
-navigate("/profile")
-    }
+    // const navigate=useNavigate()
   return(
     <Fragment>
         <div>
-            <button onClick={onclick}>
-onClick
-            </button>
+          <div>
+          <SidePannel />
+          </div>
+          <div>
+            <MapComponent />
+          </div>
+            
         </div>
+
     </Fragment>
   )
 }

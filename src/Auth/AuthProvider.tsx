@@ -31,7 +31,7 @@ const AuthProvider = ({ children }: Props) => {
             });
         }
         console.log(isvalidToken())
-        if (isvalidToken()) {
+        if (isvalidToken().valueOf()) {
             axios.defaults.headers.common["Authorization"] = token;
             // localStorage.setItem("Token", token);
             setIsauth(true)
