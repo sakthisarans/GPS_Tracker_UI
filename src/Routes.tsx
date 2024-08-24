@@ -51,10 +51,6 @@ const Routes = () => {
       element: <AboutUs />,
     },
     {
-      path:"",
-      element: <Navigate to="/home"/>
-    },
-    {
       path:"*",
       element: <NotFound/>
     },

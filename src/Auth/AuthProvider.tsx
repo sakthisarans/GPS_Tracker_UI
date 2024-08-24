@@ -12,8 +12,8 @@ const AuthProvider = ({ children }: Props) => {
     const [token, setToken_] = useState<string|null>(localStorage.getItem("Token"));
     const [isauth, setIsauth] = useState(false)
 
-    const setToken: SetTokenFunction = (newToken: string) => {
-        console.log("tom",newToken)
+    const setToken = (newToken: string) => {
+        console.log("token",newToken)
         setToken_(newToken);
     };
 
@@ -27,15 +27,16 @@ const AuthProvider = ({ children }: Props) => {
             }).then((res) => {
                 return res && res.status === 200;
             }).catch((err) => {
+                console.log(err)
                 return false;
             });
         }
         console.log(isvalidToken())
         if (isvalidToken().valueOf()) {
             axios.defaults.headers.common["Authorization"] = token;
-            // localStorage.setItem("Token", token);
             setIsauth(true)
         } else {
+            setIsauth(false)
             console.log("clear all")
             delete axios.defaults.headers.common["Authorization"];
             localStorage.clear();
