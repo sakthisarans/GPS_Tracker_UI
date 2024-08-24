@@ -3,19 +3,19 @@ import { Fragment } from "react/jsx-runtime";
 import SidePannel from "../../components/Home/SidePannel";
 import MapComponent from "../../components/Home/MapComponent";
 
-function HomePage(){
-    // const navigate=useNavigate()
-  return(
+function HomePage() {
+  // const navigate=useNavigate()
+  return (
     <Fragment>
+      <div>
         <div>
-          <div>
           <SidePannel />
-          </div>
-          <div>
-            <MapComponent />
-          </div>
-            
         </div>
+        <div>
+          <MapComponent />
+        </div>
+
+      </div>
 
     </Fragment>
   )

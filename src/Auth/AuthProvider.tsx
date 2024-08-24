@@ -19,29 +19,28 @@ const AuthProvider = ({ children }: Props) => {
 
 
     useEffect(() => {
-        const isvalidToken = (): Promise<Boolean> | Boolean => {
-            return axios.get(`${process.env.REACT_APP_BASE_URL}/tracker/user/validateToken`, {
+            axios.get(`${process.env.REACT_APP_BASE_URL}/tracker/user/validateToken`, {
                 headers: {
                     Authorization: token,
                 },
             }).then((res) => {
-                return res && res.status === 200;
+                if(res && res.status === 200){
+                    axios.defaults.headers.common["Authorization"] = token;
+                    setIsauth(true)
+                }else{
+                    setIsauth(false)
+                    console.log("clear all")
+                    delete axios.defaults.headers.common["Authorization"];
+                    localStorage.clear();
+                }
             }).catch((err) => {
                 console.log(err)
-                return false;
+                setIsauth(false)
+                console.log("clear all")
+                delete axios.defaults.headers.common["Authorization"];
+                localStorage.clear();
             });
-        }
-        console.log(isvalidToken())
-        if (isvalidToken().valueOf()) {
-            axios.defaults.headers.common["Authorization"] = token;
-            setIsauth(true)
-        } else {
-            setIsauth(false)
-            console.log("clear all")
-            delete axios.defaults.headers.common["Authorization"];
-            localStorage.clear();
-        }
-    }, [token]);
+    },[]);
 
     const contextValue: {token:string|null,setToken:SetTokenFunction,isauth:boolean} = useMemo(
         () => ({

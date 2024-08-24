@@ -9,17 +9,19 @@ import { browserName, osName, osVersion, mobileModel, mobileVendor } from 'react
 import { useAuth } from "../../Auth/AuthProvider";
 function LoginPage(): JSX.Element {
 
-    
+
 
 
     const navigate = useNavigate()
     const [isLogin, setIsLogin] = useState(true)
     const [loginForm, setLoginForm] = useState({ uname: "", pwd: "", error: "" })
 
-    const { setToken }:any  = useAuth();
+    const { setToken }: any = useAuth();
+    const { isauth,isProcessing }:any = useAuth();
 
     useEffect(() => {
-        if (localStorage.getItem("Token") != null) {
+        
+        if (isauth) {
             navigate("/home", { replace: true })
         }
     })
@@ -41,9 +43,8 @@ function LoginPage(): JSX.Element {
                 if (res.data.is2FAEnabled) {
                     setIsLogin(false)
                 } else {
-                    console.log(`${res.data.type} ${res.data.token}`)
                     setToken(`${res.data.type} ${res.data.token}`);
-                    localStorage.setItem("Token",`${res.data.type} ${res.data.token}`);
+                    localStorage.setItem("Token", `${res.data.type} ${res.data.token}`);
                     localStorage.setItem("Uname", res.data.username)
                     navigate("/home", { replace: true })
                 }
