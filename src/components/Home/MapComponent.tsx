@@ -16,7 +16,7 @@ function MapComponent() {
         key: `${process.env.REACT_APP_TOMTOM_KEY}`,
         container: mapElement.current ?? "mapDiv",
         center: [mapLongitude, mapLatitude],
-        zoom: 13,
+        zoom: 16,
       });
 
       var element = document.createElement("div")
@@ -34,9 +34,7 @@ function MapComponent() {
 
   return (
     <Fragment>
-      <div className="mapDiv">
-        <div ref={mapElement} className="mapDiv" id="map" />
-      </div>
+        <div ref={mapElement} className="mapDiv" />
     </Fragment>
   )
 }

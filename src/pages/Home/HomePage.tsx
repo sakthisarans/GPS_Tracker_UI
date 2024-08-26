@@ -2,16 +2,17 @@
 import { Fragment } from "react/jsx-runtime";
 import SidePannel from "../../components/Home/SidePannel";
 import MapComponent from "../../components/Home/MapComponent";
+import "./HomePage.css"
 
 function HomePage() {
   // const navigate=useNavigate()
   return (
     <Fragment>
       <div>
-        <div>
+        <div className="sidePannel">
           <SidePannel />
         </div>
-        <div>
+        <div className="mapContainer">
           <MapComponent />
         </div>
 

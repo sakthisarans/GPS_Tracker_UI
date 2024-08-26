@@ -1,11 +1,23 @@
-.mapDiv .mapboxgl-map{
+.mapboxgl-map{
     width: 100%;
-    height: 95vh;
+    height: 100vh;
 }
-
+.mapboxgl-popup-tip{
+    visibility: hidden;
+}
 #marker {
     background-image: url("../../Assets/car.png");
     background-size: cover;
     width: 60px;
     height: 70px;
+  }
+
+   .mapboxgl-popup-content{
+    background: transparent;
+    border: transparent;
+    box-shadow: none;
+    font-size:x-small;
+  }
+  .mapboxgl-popup-close-button{
+    visibility: hidden;
   }
