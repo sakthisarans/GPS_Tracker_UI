@@ -13,6 +13,7 @@ type trackerArrayProp = [{
 
 function HomePage() {
   const [trackerArray,setTrackerArray]=useState<[]|trackerArrayProp|any >([])
+  setTrackerArray([{trackerId:"1234",trackerState:true}])
   return (
     <Fragment>
       <div>

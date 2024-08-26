@@ -4,10 +4,12 @@ import { Sidebar, Menu, MenuItem, SubMenu, useProSidebar } from 'react-pro-sideb
 import SpeedIcon from '@mui/icons-material/Speed';
 import ReportProblemIcon from '@mui/icons-material/ReportProblem';
 import CloseIcon from '@mui/icons-material/Close';
-
+import CallSplitIcon from '@mui/icons-material/CallSplit';
 
 import './SidePannel.css'
 import { useEffect, useRef, useState } from "react";
+import SpeedPannel from "./SidePannelComponents/SpeedPannel";
+import DistancePannel from "./SidePannelComponents/DistancePannel";
 type trackerArrayProp = [{
     trackerId:string;
     trackerState:boolean
@@ -31,13 +33,16 @@ function SidePannel({ trackers }: []|trackerArrayProp|any) {
                 </span>
                 </MenuItem>
                 {
-                    trackers > 0 ?
+                    trackers.length > 0 ?
                         (<SubMenu label="Charts">
                             <MenuItem> Pie charts </MenuItem>
                             <MenuItem> Line charts </MenuItem>
                         </SubMenu>) : (<MenuItem icon={<ReportProblemIcon/>}> No Tracker Found </MenuItem>)
                 }
-                <MenuItem icon={<SpeedIcon />}> Speed </MenuItem>
+                <SubMenu icon={<SpeedIcon />} label="Speed">
+                 <SpeedPannel/>
+                  </SubMenu>
+                <SubMenu icon={<CallSplitIcon />} label="Range"> <DistancePannel/> </SubMenu>
             </Menu>
             </Sidebar>
         </Fragment>
