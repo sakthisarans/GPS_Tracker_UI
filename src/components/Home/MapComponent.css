@@ -1,0 +1,11 @@
+.mapDiv .mapboxgl-map{
+    width: 100%;
+    height: 95vh;
+}
+
+#marker {
+    background-image: url("../../Assets/car.png");
+    background-size: cover;
+    width: 60px;
+    height: 70px;
+  }
