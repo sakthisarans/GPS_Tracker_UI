@@ -3,14 +3,23 @@ import { Fragment } from "react/jsx-runtime";
 import SidePannel from "../../components/Home/SidePannel";
 import MapComponent from "../../components/Home/MapComponent";
 import "./HomePage.css"
+import { useState } from "react";
+import { ProSidebarProvider } from "react-pro-sidebar";
+
+type trackerArrayProp = [{
+  trackerId:string;
+  trackerState:boolean
+}]
 
 function HomePage() {
-  // const navigate=useNavigate()
+  const [trackerArray,setTrackerArray]=useState<[]|trackerArrayProp|any >([])
   return (
     <Fragment>
       <div>
         <div className="sidePannel">
-          <SidePannel />
+        <ProSidebarProvider>
+          <SidePannel trackers={trackerArray}/>
+        </ProSidebarProvider>
         </div>
         <div className="mapContainer">
           <MapComponent />
