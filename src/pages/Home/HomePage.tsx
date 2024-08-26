@@ -3,17 +3,16 @@ import { Fragment } from "react/jsx-runtime";
 import SidePannel from "../../components/Home/SidePannel";
 import MapComponent from "../../components/Home/MapComponent";
 import "./HomePage.css"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ProSidebarProvider } from "react-pro-sidebar";
 
-type trackerArrayProp = [{
-  trackerId:string;
-  trackerState:boolean
-}]
+type trackerArrayProp = {trackerId:string,trckerStatus:boolean}
 
 function HomePage() {
-  const [trackerArray,setTrackerArray]=useState<[]|trackerArrayProp|any >([])
-  setTrackerArray([{trackerId:"1234",trackerState:true}])
+  const [trackerArray,setTrackerArray]=useState<trackerArrayProp[]>()
+  useEffect(()=>{
+  setTrackerArray([{trackerId:"1234",trckerStatus:true}])
+  },[])
   return (
     <Fragment>
       <div>
