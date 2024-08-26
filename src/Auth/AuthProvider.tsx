@@ -13,34 +13,38 @@ const AuthProvider = ({ children }: Props) => {
     const [isauth, setIsauth] = useState(false)
 
     const setToken = (newToken: string) => {
-        console.log("token",newToken)
         setToken_(newToken);
     };
 
 
     useEffect(() => {
-            axios.get(`${process.env.REACT_APP_BASE_URL}/tracker/user/validateToken`, {
-                headers: {
-                    Authorization: token,
-                },
-            }).then((res) => {
-                if(res && res.status === 200){
-                    axios.defaults.headers.common["Authorization"] = token;
-                    setIsauth(true)
-                }else{
-                    setIsauth(false)
-                    console.log("clear all")
-                    delete axios.defaults.headers.common["Authorization"];
-                    localStorage.clear();
-                }
-            }).catch((err) => {
-                console.log(err)
+        validate()
+    },[]);
+
+    async function validate() {
+        await axios.get(`${process.env.REACT_APP_BASE_URL}/tracker/user/validateToken`, {
+            headers: {
+                Authorization: token,
+            },
+        }).then((res) => {
+            if(res && res.status === 200){
+                axios.defaults.headers.common["Authorization"] = token;
+                setIsauth(true)
+            }else{
                 setIsauth(false)
                 console.log("clear all")
                 delete axios.defaults.headers.common["Authorization"];
                 localStorage.clear();
-            });
-    },[]);
+            }
+        }).catch((err) => {
+            console.log(err)
+            setIsauth(false)
+            console.log("clear all")
+            delete axios.defaults.headers.common["Authorization"];
+            localStorage.clear();
+        });
+        return isauth;
+    }
 
     const contextValue: {token:string|null,setToken:SetTokenFunction,isauth:boolean} = useMemo(
         () => ({
