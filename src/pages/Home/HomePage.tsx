@@ -11,8 +11,13 @@ type trackerArrayProp = {trackerId:string,trckerStatus:boolean}
 function HomePage() {
   const [trackerArray,setTrackerArray]=useState<trackerArrayProp[]>()
   useEffect(()=>{
-  setTrackerArray([{trackerId:"1234",trckerStatus:true}])
+  setTrackerArray([{trackerId:"1234",trckerStatus:true},{trackerId:"12345",trckerStatus:false}])
   },[])
+
+
+  useEffect(()=>{
+    console.log("trackerStsteChanged")
+  },[JSON.stringify(trackerArray)])
   return (
     <Fragment>
       <div>
