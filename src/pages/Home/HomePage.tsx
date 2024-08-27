@@ -5,13 +5,22 @@ import MapComponent from "../../components/Home/MapComponent";
 import "./HomePage.css"
 import { useEffect, useState } from "react";
 import { ProSidebarProvider } from "react-pro-sidebar";
+import axios from "axios";
 
 type trackerArrayProp = {trackerId:string,trckerStatus:boolean}
 
 function HomePage() {
   const [trackerArray,setTrackerArray]=useState<trackerArrayProp[]>()
   useEffect(()=>{
-  setTrackerArray([{trackerId:"1234",trckerStatus:true},{trackerId:"12345",trckerStatus:false}])
+    axios.get(`${process.env.REACT_APP_BASE_URL}/tracker/emqx/user/trackerlist`,{
+      headers: {
+        email: "token",
+    }
+    }).then(res=>{
+      if(res && res.status===200&&res.data.length>0){
+        setTrackerArray(res.data)
+      }
+    }).catch()
   },[])
 
 
