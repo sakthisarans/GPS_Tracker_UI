@@ -6,36 +6,8 @@ import AboutUs from "./pages/AboutUs/AboutUs";
 import NotFound from "./pages/error/NotFound";
 import HomePage from "./pages/Home/HomePage";
 import { ProtectedRoute } from "./Auth/ProtectedRoute";
+import SignupPage from "./pages/loginSignup/SignupPage";
 
-// const authenticate = () => {
-//   let token = localStorage.getItem("Token")
-//   const validateToken = (): Promise<boolean> | boolean => {
-//     return axios.get(`${process.env.REACT_APP_BASE_URL}/tracker/user/validateToken`, {
-//       headers: {
-//         Authorization: token,
-//       },
-//     }).then((res) => {
-//       return res && res.status === 200;
-//     }).catch((err) => {
-//       return false;
-//     });
-//   }
-//   if (token==null) {
-//     delete axios.defaults.headers.common["Authorization"];
-//     localStorage.removeItem("Token");
-//     return <Navigate to="/login" />;
-//   } else {
-//     if (validateToken()) {
-//       axios.defaults.headers.common["Authorization"] = token;
-//       return <Outlet />;
-//     } else {
-//       delete axios.defaults.headers.common["Authorization"];
-//       console.log("clear")
-//       localStorage.clear();
-//       return <Navigate to="/login" />;
-//     }
-//   }
-// }
 const Routes = () => {
   const routesForPublic = [
     {
@@ -44,7 +16,7 @@ const Routes = () => {
     },
     {
       path: "/signup",
-      element: <p>sign up</p>,
+      element: <SignupPage />,
     },
     {
       path: "/aboutus",

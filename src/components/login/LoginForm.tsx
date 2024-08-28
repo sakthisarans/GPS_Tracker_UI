@@ -44,8 +44,8 @@ function LoginForm({loginForm,handleSubmit}:LoginFormProps):JSX.Element{
                                 <p id="error">{getPwdeError}</p>
                             </span> */}
                             <div className="links">
-                                <Link to="/home">Forgot Password</Link>
-                                <Link to="/aboutus">Signup</Link>
+                                <Link to="/aboutus">Forgot Password</Link>
+                                <Link to="/signup">Signup</Link>
                             </div>
                             <div className="inputBox">
                                 <input type="submit" value="Login" onClick={(e)=>handleSubmit(e)} />

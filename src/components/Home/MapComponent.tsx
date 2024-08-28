@@ -8,7 +8,7 @@ function MapComponent() {
   const mapElement = createRef<HTMLDivElement>();
   const [mapLongitude, ] = useState(80.2705);
   const [mapLatitude, ] = useState(13.0843);
-  const [, setMap] = useState({});
+  const [map, setMap] = useState({});
 
   useEffect(() => {
      

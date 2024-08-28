@@ -17,10 +17,9 @@ function LoginPage(): JSX.Element {
     const [loginForm, setLoginForm] = useState({ uname: "", pwd: "", error: "" })
 
     const { setToken }: any = useAuth();
-    const { isauth,isProcessing }:any = useAuth();
+    const { isauth }:any = useAuth();
 
     useEffect(() => {
-        
         if (isauth) {
             navigate("/home", { replace: true })
         }

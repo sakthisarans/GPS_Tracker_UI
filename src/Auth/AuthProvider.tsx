@@ -10,7 +10,7 @@ type SetTokenFunction = (newToken: string) => void;
 
 const AuthProvider = ({ children }: Props) => {
     const [token, setToken_] = useState<string|null>(localStorage.getItem("Token"));
-    const [isauth, setIsauth] = useState(false)
+    const [isauth, setIsauth] = useState<boolean>(false)
 
     const setToken = (newToken: string) => {
         setToken_(newToken);
@@ -18,8 +18,12 @@ const AuthProvider = ({ children }: Props) => {
 
 
     useEffect(() => {
-        validate()
-    },[]);
+        if(token){
+            validate()
+        }else{
+            setIsauth(false)
+        }
+    });
 
     async function validate() {
         await axios.get(`${process.env.REACT_APP_BASE_URL}/tracker/user/validateToken`, {

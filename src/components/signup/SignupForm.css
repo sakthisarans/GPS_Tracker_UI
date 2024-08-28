@@ -1,0 +1,49 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300);
+* {
+  font-family: 'Open Sans', sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #111;
+  background-repeat: no-repeat;
+}
+
+.signupSection {
+  background: url(https://source.unsplash.com/TV2gg2kZD1o/1600x800);
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: 480px;
+  text-align: center;
+  display: flex;
+  color: white;
+  box-shadow: 3px 10px 20px 5px rgba(0, 0, 0, .5);
+}
+
+.info {
+  width: 45%;
+  background: rgba(20, 20, 20, .8);
+  padding: 30px 0;
+  border-right: 5px solid rgba(30, 30, 30, .8);
+  h2 {
+    padding-top: 30px;
+    font-weight: 300;
+  }
+  p {
+    font-size: 18px;
+  }
+  .icon {
+    font-size: 8em;
+    padding: 20px 0;
+    color: rgba(10, 180, 180, 1);
+  }
+}
+
+
+
