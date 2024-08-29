@@ -21,36 +21,29 @@
     color: white;
     outline: none;
   }
+  .address {
+    margin: 15px 0;
+    font-size: 16px;
+    padding: 10px;
+    width: 40%;
+    margin-right: 5%;
+    border: 1px solid rgba(10, 180, 180, 1);
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background: rgba(20, 20, 20, .2);
+    color: white;
+    outline: none;
+  }
   
   .noBullet {
-    margin-top: 5%;
-    align-self: auto;
     list-style-type: none;
     padding: 0;
   }
-  .trackerinfo{
-    margin-top: 17%;
-  }
   
-  #join-btn1 {
-    border: 1px solid rgba(10, 180, 180, 1);
-    background: rgba(20, 20, 20, .6);
-    font-size: 18px;
-    color: white;
-    margin-top: 20px;
-    padding: 10px 35px;
-    cursor: pointer;
-    transition: .4s;
-    &:hover {
-      background: rgba(20, 20, 20, .8);
-    }
-  }
-
   #join-btn {
     border: 1px solid rgba(10, 180, 180, 1);
-    margin-left: 10px;
     background: rgba(20, 20, 20, .6);
-
     font-size: 18px;
     color: white;
     margin-top: 20px;

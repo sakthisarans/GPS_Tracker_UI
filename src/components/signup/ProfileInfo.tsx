@@ -45,19 +45,19 @@ function ProfileInfo({ signupFormData, handleSubmit }: signupFormDataPrope):JSX.
                     <ul className="noBullet">
                         <li>
                             <label htmlFor="username"></label>
-                            <input type="text" className="inputFields" id="username" name="username" placeholder="Username"  required />
+                            <input type="text" className="inputFields" id="username" name="username" placeholder="Username"   />
                         </li>
                         <li>
                             <label htmlFor="email"></label>
-                            <input type="email" className="inputFields" id="email" name="email" placeholder="Email"  required />
+                            <input type="email" className="inputFields" id="email" name="email" placeholder="Email"   />
                         </li>
                         <li>
                             <label htmlFor="password"></label>
-                            <input type="password" className="inputFields" id="password" name="password" placeholder="Password"  required />
+                            <input type="password" className="inputFields" id="password" name="password" placeholder="Password"   />
                         </li>
                         <li>
                             <label htmlFor="Confirm Password"></label>
-                            <input type="password" className="inputFields" id="password" name="password" placeholder="Confirm Password"  required />
+                            <input type="password" className="inputFields" id="confirmpassword" name="password" placeholder="Confirm Password"   />
                         </li>
                         
                         <li id="center-btn">

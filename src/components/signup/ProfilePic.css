@@ -1,0 +1,10 @@
+.image{
+    width: 210px;
+    height: 210px;
+    border-radius:80%;
+    object-fit: cover;
+}
+
+.myfile{
+    display:none
+}
