@@ -7,6 +7,10 @@
       font-weight: 300;
     }
   }
+
+  .h2verify{
+    margin-top: 30%;
+  }
   .inputFields.inputError{
     border: 1px solid rgb(247, 0, 0);
     border-color: red;
@@ -34,7 +38,11 @@
   .trackerinfo{
     margin-top: 17%;
   }
-  
+  .inputFields.otp{
+    text-align: center;
+    align-content: center;
+    align-self: center;
+  }
   #join-btn1 {
     border: 1px solid rgba(10, 180, 180, 1);
     background: rgba(20, 20, 20, .6);

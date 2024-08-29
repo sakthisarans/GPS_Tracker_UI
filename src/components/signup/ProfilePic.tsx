@@ -16,7 +16,7 @@ type addressPrope = {
 type trackerPrope = {
     trackerID: string;
     vehicleNumber: string;
-} | []
+} 
 type additionalInfoPrope = {
     regionCode: string;
     currencyCode: string;
@@ -55,6 +55,7 @@ function ProfilePic ({ signupFormData }: signupFormDataPrope){
           }
     }
     useEffect(()=>{
+        signupFormData.profilePicture=imageUrl.current
         if(image.raw){
             const formData = new FormData();
             formData.append('file', image.raw);
@@ -63,7 +64,7 @@ function ProfilePic ({ signupFormData }: signupFormDataPrope){
                 'Content-Type': 'multipart/form-data',
               },
             }).then(res=>{
-                signupFormData.profilePicture=res.data.uri
+                imageUrl.current=res.data.uri
             }).catch(error=>{
                 setImage({ preview: "", raw: "" })
                 alert("Upload Picture Failed Try Again")

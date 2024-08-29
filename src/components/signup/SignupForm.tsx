@@ -6,6 +6,8 @@ import TrackerInfo from './TrackerInfo';
 import AddressInfo from './AddressInfo';
 import ProfilePic from './ProfilePic';
 import { Tilt } from 'react-tilt';
+import axios from 'axios';
+import OtpPannel from './OtpPannel';
 
 type addressPrope = {
     addresslane1: string;
@@ -19,7 +21,7 @@ type addressPrope = {
 type trackerPrope = {
     trackerID: string;
     vehicleNumber: string;
-} | []
+}
 type additionalInfoPrope = {
     regionCode: string;
     currencyCode: string;
@@ -39,7 +41,6 @@ type signupFormPrope = {
 
 type signupFormDataPrope = {
     signupFormData: signupFormPrope;
-    handleSubmit: any;
     Error: React.MutableRefObject<string>;
 }
 
@@ -49,9 +50,9 @@ type signupFormStatePrope = {
 }
 
 
-function SignupForm({ signupFormData, handleSubmit, Error }: signupFormDataPrope): JSX.Element {
+function SignupForm({ signupFormData, Error }: signupFormDataPrope): JSX.Element {
 
-    const [signupFormState,setSignupFormState] = useState<signupFormStatePrope[]>([{ PannelName: "PersonalInfo", PannelState: true }, { PannelName: "TrackerInfo", PannelState: false }, { PannelName: "AddressInfo", PannelState: false }])
+    const [signupFormState, setSignupFormState] = useState<signupFormStatePrope[]>([{ PannelName: "PersonalInfo", PannelState: true }, { PannelName: "TrackerInfo", PannelState: false }, { PannelName: "AddressInfo", PannelState: false }, { PannelName: "OtpPannel", PannelState: false }])
 
 
     const onClickNext = (NextPannelName: string) => {
@@ -61,9 +62,31 @@ function SignupForm({ signupFormData, handleSubmit, Error }: signupFormDataPrope
         }));
         setSignupFormState(updatedState);
     }
+    const handleSubmit = async () => {
+        console.log(signupFormData)
+        try {
+            await axios.post(`${process.env.REACT_APP_BASE_URL}/tracker/auth/user/signup`, signupFormData).then(res => {
+                console.log(res)
+                if (res.status === 201) {
+                    axios.post(`${process.env.REACT_APP_BASE_URL}/tracker/auth/user/accountverify/generateotp`, { email: signupFormData.email }).then(res1 => {
+                        if (res1.status === 200) {
+                            onClickNext('OtpPannel')
+                        }
+                    })
+                }else{
+                    alert(res)
+                }
+            })
+
+        }
+        catch (err) {
+            alert(err)
+        }
 
 
-    const getCurrentPannel = () :JSX.Element => {
+    }
+
+    const getCurrentPannel = (): JSX.Element => {
         const currentPannel = signupFormState.find((x) => x.PannelState);
         if (currentPannel) {
             if (currentPannel.PannelName === 'PersonalInfo') {
@@ -74,6 +97,9 @@ function SignupForm({ signupFormData, handleSubmit, Error }: signupFormDataPrope
             }
             if (currentPannel.PannelName === 'AddressInfo') {
                 return <AddressInfo signupFormData={signupFormData} handleSubmit={onClickNext} onclickSignup={handleSubmit} />;
+            }
+            if (currentPannel.PannelName === "OtpPannel") {
+                return <OtpPannel email={signupFormData.email}/>
             }
         }
         return <></>;
@@ -87,10 +113,10 @@ function SignupForm({ signupFormData, handleSubmit, Error }: signupFormDataPrope
                     <p>The Future Is Here</p>
                     <div className="icon" >
                         <Tilt>
-                            <ProfilePic signupFormData={signupFormData}/>
+                            <ProfilePic signupFormData={signupFormData} />
                         </Tilt>
                     </div>
-                    
+
                 </div>
                 {
                     (getCurrentPannel())

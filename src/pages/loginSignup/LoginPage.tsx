@@ -9,9 +9,6 @@ import { browserName, osName, osVersion, mobileModel, mobileVendor } from 'react
 import { useAuth } from "../../Auth/AuthProvider";
 function LoginPage(): JSX.Element {
 
-
-
-
     const navigate = useNavigate()
     const [isLogin, setIsLogin] = useState(true)
     const [loginForm, setLoginForm] = useState({ uname: "", pwd: "", error: "" })
