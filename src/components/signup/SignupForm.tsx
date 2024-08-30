@@ -8,6 +8,7 @@ import ProfilePic from './ProfilePic';
 import { Tilt } from 'react-tilt';
 import axios from 'axios';
 import OtpPannel from './OtpPannel';
+import { Link } from 'react-router-dom';
 
 type addressPrope = {
     addresslane1: string;
@@ -114,7 +115,11 @@ function SignupForm({ signupFormData, Error }: signupFormDataPrope): JSX.Element
                     <div className="icon" >
                         <Tilt>
                             <ProfilePic signupFormData={signupFormData} />
+                            
                         </Tilt>
+                        
+                        <Link to="/login" className='about-link-text-div'><span className='about-link-text'>Already Have Account</span></Link>
+
                     </div>
 
                 </div>

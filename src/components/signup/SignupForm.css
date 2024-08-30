@@ -35,12 +35,17 @@ body {
     font-weight: 300;
   }
   p {
+    padding-top: 10px;
     font-size: 18px;
   }
   .icon {
-    padding: 20% 0;
+    padding: 15% 0;
     color: rgba(10, 180, 180, 1);
   }
+}
+
+.about-link-text{
+  color: rgb(13, 110, 236);
 }
 
 

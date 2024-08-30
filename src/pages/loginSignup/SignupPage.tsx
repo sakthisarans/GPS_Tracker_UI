@@ -50,7 +50,7 @@ function SignupPage() {
 
     return (
         <Fragment>
-                (<SignupForm signupFormData={signupFormData} Error={Error}/>)
+                <SignupForm signupFormData={signupFormData} Error={Error}/>
         </Fragment>
     )
 }
