@@ -1,0 +1,51 @@
+.badge {
+    background-color: #4CAF50;
+    color: white;
+    padding: 4px 8px;
+    text-align: center;
+    border-radius: 50px;
+    /* display: flex; */
+  align-items: center;
+}
+
+.badge i {
+    margin-right: 4px; 
+  }
+
+.badge:hover{
+    cursor: pointer;
+}
+.offline {
+    background-color: red;
+}
+
+.lastOnline {
+    display: none;
+    position: absolute;
+    top: 100%; 
+    font-weight: bolder;
+    left: 50%; 
+    transform: translateX(-50%); 
+    background-color: gray;
+    padding: 8px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    white-space: nowrap;
+}
+
+.lastOnline::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: #f0f0f0;
+}
+.onlineStatus:hover .lastOnline {
+    display: block;
+}
+
+
+
+

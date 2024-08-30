@@ -8,3 +8,17 @@
     z-index: 2; 
     position: absolute;
 }
+.trackerStatus{
+    z-index: 2;
+    position: absolute; 
+    top:17.5px;
+    right:55px;
+}
+.profileDiv{
+    z-index: 2;
+    position: absolute; 
+    top:21px;
+    right:50px;
+    height: auto;
+    align-content:end;
+}

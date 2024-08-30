@@ -1,6 +1,6 @@
 import { Fragment } from 'react/jsx-runtime';
 import './SignupForm.css'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import ProfileInfo from './ProfileInfo';
 import TrackerInfo from './TrackerInfo';
 import AddressInfo from './AddressInfo';
