@@ -4,7 +4,6 @@ type trackerArrayProp = { trackerId: string, trckerStatus: boolean }
 
 
 const TrackerList: React.FC<{ trackers: trackerArrayProp[] | undefined }> = ({ trackers }) => {
-
     const setTrackerState=(id:string)=>{
         trackers?.forEach(x=>{
             if(x.trackerId===id){
@@ -12,9 +11,7 @@ const TrackerList: React.FC<{ trackers: trackerArrayProp[] | undefined }> = ({ t
             }else{
                 x.trckerStatus=false
             }
-            
         })
-        console.log(trackers)
     }
     return (
         <SubMenu label="Trackers" icon={<GpsFixedIcon />}>
