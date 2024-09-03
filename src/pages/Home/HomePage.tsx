@@ -9,11 +9,14 @@ import axios from "axios";
 import TrackerStatus from "../../components/Home/TrackerStatus/TrackerStatus";
 import ProfileBatch from "../../components/Profiles/ProfileBatch";
 
-type trackerArrayProp = { trackerId: string, trckerStatus: boolean }
+type trackerArrayProp = { trackerId: string, trackerStatus: boolean }
+
+type coordinates = {lat:string,lang:string,date:string}
 
 function HomePage() {
   const [trackerArray, setTrackerArray] = useState<trackerArrayProp[]>()
   const [isOnline, setIsOnline] = useState<boolean>(false)
+  const [coordinates,setCoordinates]=useState<coordinates|undefined>()
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_BASE_URL}/tracker/emqx/user/trackerlist`).then(res => {
       console.log(res)
@@ -24,13 +27,10 @@ function HomePage() {
   }, [])
 
   const fetchData = () => {
-    console.log("c  ")
     if (trackerArray) {
-      const activeTrackers = trackerArray.filter(tracker => tracker.trckerStatus);
-      const activeTrackerIds = activeTrackers.map(tracker => tracker.trackerId);
-      console.log(trackerArray)
-      console.log(activeTrackers)
-      console.log(activeTrackerIds)
+
+      const activeTrackers=trackerArray.filter(x=> x.trackerStatus)
+      const activeTrackerIds = activeTrackers[0].trackerId
       axios.get(`${process.env.REACT_APP_BASE_URL}/tracker/emqx/user/getlatestcoordinates`, {
         params: {
           trackerId: `${activeTrackerIds}`
@@ -38,6 +38,7 @@ function HomePage() {
       }).then(res => {
         if (res.status === 200) {
           setIsOnline(res.data.trackerStatus.online)
+          setCoordinates(res.data.coordinates)
         }
       }).catch(err => {
         alert(err)
@@ -46,9 +47,9 @@ function HomePage() {
   }
 
   useEffect(() => {
-    const intervalId = setInterval(fetchData, 10000);
+    const intervalId = setInterval(fetchData, 5000);
     return () => clearInterval(intervalId);
-  }, [])
+  }, [trackerArray])
   return (
     <Fragment>
       <div>
@@ -64,11 +65,9 @@ function HomePage() {
           <ProfileBatch />
         </div>
         <div className="mapContainer">
-          <MapComponent />
+          <MapComponent coordinates={coordinates} />
         </div>
-
       </div>
-
     </Fragment>
   )
 }

@@ -8,12 +8,11 @@ import CallSplitIcon from '@mui/icons-material/CallSplit';
 
 
 import './SidePannel.css'
-import { JSXElementConstructor, ReactElement, ReactNode, ReactPortal, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import SpeedPannel from "./SidePannelComponents/SpeedPannel";
 import DistancePannel from "./SidePannelComponents/DistancePannel";
-import { promises } from "dns";
 import TrackerList from "./SidePannelComponents/TrackerList";
-type trackerArrayProp = { trackerId: string, trckerStatus: boolean }
+type trackerArrayProp = { trackerId: string, trackerStatus: boolean }
 
 
 const SidePannel: React.FC<{ trackers: trackerArrayProp[] | undefined }> = ({ trackers }) => {
