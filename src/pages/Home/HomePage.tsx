@@ -19,7 +19,6 @@ function HomePage() {
   const [coordinates,setCoordinates]=useState<coordinates|undefined>()
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_BASE_URL}/tracker/emqx/user/trackerlist`).then(res => {
-      console.log(res)
       if (res && res.status === 200 && res.data.length > 0) {
         setTrackerArray(res.data)
       }
