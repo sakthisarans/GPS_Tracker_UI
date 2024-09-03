@@ -16,7 +16,7 @@ const MapComponent: React.FC<{ coordinates: coordinates | undefined }> = ({ coor
     if (coordinates) {
       map.setCenter([parseFloat(coordinates.lang), parseFloat(coordinates.lat)]);
       if(defaultMarker){
-      defaultMarker.current.setLngLat([parseFloat(coordinates.lang), parseFloat(coordinates.lat)]).addTo(map)
+      defaultMarker.current.setLngLat([parseFloat(coordinates.lang), parseFloat(coordinates.lat)]).remove().addTo(map)
       var popup = new tt.Popup().setHTML(
         "<b>TN 15 X 1234</b>"
       )
