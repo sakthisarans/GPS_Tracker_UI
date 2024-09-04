@@ -10,17 +10,17 @@ type coordinates = { lat: string, lang: string, date: string }
 const MapComponent: React.FC<{ coordinates: coordinates | undefined }> = ({ coordinates }) => {
   const mapElement = createRef<HTMLDivElement>();
   const [map, setMap] = useState<any>({});
-  const defaultMarker=useRef<Marker>(new tt.Marker({ }))
-  
+  const defaultMarker = useRef<Marker>(new tt.Marker({}))
+
   useEffect(() => {
     if (coordinates) {
       map.setCenter([parseFloat(coordinates.lang), parseFloat(coordinates.lat)]);
-      if(defaultMarker){
-      defaultMarker.current.setLngLat([parseFloat(coordinates.lang), parseFloat(coordinates.lat)]).remove().addTo(map)
-      var popup = new tt.Popup().setHTML(
-        "<b>TN 15 X 1234</b>"
-      )
-      defaultMarker.current.setPopup(popup).togglePopup()
+      if (defaultMarker) {
+        defaultMarker.current.setLngLat([parseFloat(coordinates.lang), parseFloat(coordinates.lat)]).remove().addTo(map)
+        var popup = new tt.Popup().setHTML(
+          "<b>TN 15 X 1234</b>"
+        )
+        defaultMarker.current.setPopup(popup).togglePopup()
       }
     }
 
@@ -31,13 +31,14 @@ const MapComponent: React.FC<{ coordinates: coordinates | undefined }> = ({ coor
     let map = tt.map({
       key: `${process.env.REACT_APP_TOMTOM_KEY}`,
       container: mapElement.current ?? "mapDiv",
-      center: [0, 0],
+      // center: [0, 0],
+      geopoliticalView: 'IN',
       zoom: 16,
     });
     var element = document.createElement("div")
     element.id = "marker"
     var marker = new tt.Marker({ element: element }).setLngLat([(0), (0)])
-    defaultMarker.current=marker
+    defaultMarker.current = marker
     setMap(map);
     return () => map.remove();
 

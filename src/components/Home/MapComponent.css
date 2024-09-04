@@ -17,6 +17,8 @@
     border: transparent;
     box-shadow: none;
     font-size:x-small;
+    margin-bottom: 40px;
+    margin-left: 15px;
   }
   .mapboxgl-popup-close-button{
     visibility: hidden;
