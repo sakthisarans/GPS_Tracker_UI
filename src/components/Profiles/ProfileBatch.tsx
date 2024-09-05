@@ -5,11 +5,13 @@ import axios from 'axios';
 function ProfileBatch() {
     const isOnline = useRef<boolean>(false)
     const [image,setImage]=useState<string>('')
+    const [uname,setUname]=useState<string>('')
     const [hideSummar,sethideSummar]=useState<boolean>(true)
     useEffect(()=>{
         axios.get(`${process.env.REACT_APP_BASE_URL}/tracker/emqx/user/getprofile`).then(res=>{
             if(res.status===200){
                 setImage(res.data.image)
+                setUname(res.data.uname)
             }
         }).catch(ex=>{
             alert(ex)
@@ -17,10 +19,16 @@ function ProfileBatch() {
 
     },[])
 
-    const logOut=()=>{
-                delete axios.defaults.headers.common["Authorization"];
-                localStorage.clear();
-                window.location.reload();
+    const logOut=async ()=>{
+                const payload={token:localStorage.getItem("Token")?.split(" ")[1]}
+                await axios.post(`${process.env.REACT_APP_BASE_URL}/tracker/user/signout`,payload).then(res=>{
+                    if(res.status==200){
+                        delete axios.defaults.headers.common["Authorization"];
+                        localStorage.clear();
+                        window.location.reload();
+                    }
+                })
+                
     }
 
     return (
@@ -35,7 +43,7 @@ function ProfileBatch() {
             </div>
             <div className='profiledetail'>
                 <img className='image' src={image}></img>
-                <p>Nao</p>
+                <p>{uname}</p>
             </div>
             <div>
             <ul>
