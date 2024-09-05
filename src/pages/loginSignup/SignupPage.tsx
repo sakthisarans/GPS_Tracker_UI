@@ -4,6 +4,7 @@ import { useAuth } from '../../Auth/AuthProvider';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SignupForm from '../../components/signup/SignupForm';
+import LoadingComponent from '../../components/Loading/LoadingComponent';
 
 
 type addressPrope = {
@@ -43,14 +44,17 @@ function SignupPage() {
     const Error=useRef<string>("")
     const [signupFormData, ]=useState<signupFormPrope>({"userName": "","profilePicture": "","password": "","email": "","contact": "","address": {"addresslane1": "","addresslane2": "","city": "","state": "","country": "","zipCode": ""},"trackerList": [ ],"additionalInfo": {"regionCode": "","currencyCode": ""},"roleList": []});
     useEffect(() => {
-        if (isauth) {
+        if (isauth===true) {
             navigate("/home", { replace: true })
         }
     })
 
     return (
         <Fragment>
+            {isauth===undefined ? <LoadingComponent />
+            : 
                 <SignupForm signupFormData={signupFormData} Error={Error}/>
+            }
         </Fragment>
     )
 }
