@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './AddressInfo.css'
+import axios from 'axios';
 type addressPrope = {
     addresslane1: string;
     addresslane2: string;
@@ -35,10 +36,32 @@ type signupFormDataPrope = {
     handleSubmit: any;
     onclickSignup: any;
 }
+type phoneCode={
+    code:string,
+    lable:string,
+    phone:string,
+    phoneLength:any,
+    min:number,
+    max:number
+}
+
+
 function AddressInfo({ signupFormData, handleSubmit, onclickSignup }: signupFormDataPrope): JSX.Element {
 
     const [addressData, setAddressData] = useState<addressPrope>({ addresslane1: "", addresslane2: "", city: "", state: "", country: "", zipCode: "" })
     const [Errors, setErrors] = useState({ addLane1: false, addLane2: false, city: false, state: false, country: false, zip: false,contact:false })
+    const [phoneCode,setPhoneCode]=useState<phoneCode[]>([])
+    const [listPhoneCode,setListPhoneCode]=useState<phoneCode[]>([])
+
+    useEffect(()=>{
+        axios.get(`${process.env.REACT_APP_BASE_URL}/tracker/resource/phonecode`).then(res=>{
+            if (res.status===200){
+                setPhoneCode(res.data)
+            }
+        }).catch(err=>{
+            alert(err)
+        })
+    },[])
 
     const onAddresslaneOneBlur = (e: any) => {
         let temp = e.target.value
@@ -131,7 +154,6 @@ function AddressInfo({ signupFormData, handleSubmit, onclickSignup }: signupForm
                 ...prevData,
                 country: temp,
             }));
-
         } else {
             setErrors((prevData) => ({
                 ...prevData,
@@ -197,9 +219,7 @@ function AddressInfo({ signupFormData, handleSubmit, onclickSignup }: signupForm
                 <input type="text" className={!Errors.addLane1 ? "inputFields address" : "inputFields address inputError"}  placeholder="Address Lane 1" onBlur={onAddresslaneOneBlur} />
                 <input type="email" className={!Errors.addLane2 ? "inputFields address" : "inputFields address inputError"}  placeholder="Address Lane 2" onBlur={onAddresslaneTwoBlur}/>
             </li>
-
             <li>
-
                 <input type="text" className={!Errors.city ? "inputFields address" : "inputFields address inputError"}  placeholder="City" onBlur={onCityBlur}/>
                 <input type="text" className={!Errors.state ? "inputFields address" : "inputFields address inputError"}  placeholder="State" onBlur={onStateBlur} />
             </li>
@@ -210,15 +230,12 @@ function AddressInfo({ signupFormData, handleSubmit, onclickSignup }: signupForm
             <li>
                 <input type="text" className={!Errors.contact ? "inputFields" : "inputFields inputError"}  placeholder="Contact Number" onBlur={onContactBlur} />
             </li>
-
             <li id="center-btn">
                 <input type="submit" id="join-btn1" value="Previous" onClick={() => { handleSubmit("TrackerInfo") }} />
                 <input type="submit" id="join-btn" value="SignUp" onClick={onNext} />
             </li>
-
         </ul>
     </div>)
 }
-
 
 export default AddressInfo;

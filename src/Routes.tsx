@@ -1,12 +1,12 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { Navigate } from "react-router-dom";
 import LoginPage from "./pages/loginSignup/LoginPage";
 import AboutUs from "./pages/AboutUs/AboutUs";
-// import axios from "axios";
 import NotFound from "./pages/error/NotFound";
 import HomePage from "./pages/Home/HomePage";
 import { ProtectedRoute } from "./Auth/ProtectedRoute";
 import SignupPage from "./pages/loginSignup/SignupPage";
+import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
+import ResetPassword from "./pages/ForgotPassword/ResetPassword";
 
 const Routes = () => {
   const routesForPublic = [
@@ -23,6 +23,14 @@ const Routes = () => {
       element: <AboutUs />,
     },
     {
+      path: "/forgotpassword",
+      element: <ForgotPassword />,
+    },
+    {
+      path: "/resetpassword",
+      element: <ResetPassword />,
+    },
+    {
       path:"*",
       element: <NotFound/>
     },
@@ -31,7 +39,6 @@ const Routes = () => {
   const routesForAuthenticatedOnly = [
     {
       path: "/",
-      // element: authenticate(),
       element: <ProtectedRoute />,
       children: [
         {
