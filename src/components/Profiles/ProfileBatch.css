@@ -44,14 +44,15 @@
     margin-bottom: 25px;
 }
 
-/* .button-17 {
-    z-index: 0;
-} */
 .profileSummary .li{
     margin-bottom: 25px;
     list-style-type: none;
 }
 .profileSummary .close p{
+    color: black;
+}
+
+.profileSummary .profiledetail p{
     color: black;
 }
 
