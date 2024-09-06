@@ -51,6 +51,9 @@
     margin-bottom: 25px;
     list-style-type: none;
 }
+.profileSummary .close p{
+    color: black;
+}
 
 .profileSummary .li .button{
     align-items: center;
