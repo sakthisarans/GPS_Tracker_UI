@@ -55,7 +55,7 @@ function ResetPassword(){
 
     const buttonOnClick = () =>{
         if((inputState.validPwd&&inputState.pwdTouched)&&(inputState.validconfirmPwd&&inputState.confirmpwdTouched)){
-            axios.put(`${process.env.REACT_APP_BASE_URL}/tracker/auth/user/generateresetlink`,{password:password},{params:{"resetToken":token}}).then(res=>{
+            axios.put(`${process.env.REACT_APP_BASE_URL}/tracker/auth/user/resetpassword`,{password:password},{params:{"resetToken":token}}).then(res=>{
                 if(res.status===202){
                     navigate("/login", { replace: true })
                 }
